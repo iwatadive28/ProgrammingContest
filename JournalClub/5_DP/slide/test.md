@@ -16,11 +16,12 @@ _footer: 'Photo by https://www.pakutaso.com/'
 
 # 目次 <!-- omit in toc -->
 - [動的計画法とは？](#動的計画法とは)
-- [ABC261_D_Flipping and Bonus](#abc261_d_flipping-and-bonus)
-- [Flog問題](#flog問題)
+- [例題：Flog問題(EDPC_A-Frog1)](#例題flog問題edpc_a-frog1)
+- [緩和処理](#緩和処理)
 - [配るDPと貰うDP](#配るdpと貰うdp)
-- [ナップサック問題](#ナップサック問題)
-- [編集距離を求める問題](#編集距離を求める問題)
+- [例題：ABC261_D_Flipping and Bonus](#例題abc261_d_flipping-and-bonus)
+- [例題：ナップサック問題 (未)](#例題ナップサック問題-未)
+- [例題：編集距離を求める問題 (未)](#例題編集距離を求める問題-未)
 - [まとめ](#まとめ)
 
 ---
@@ -51,7 +52,115 @@ _footer: 'Photo by https://www.pakutaso.com/'
 ・・・らしいです。
 
 ---
-# [ABC261_D_Flipping and Bonus](https://atcoder.jp/contests/abc261/tasks/abc261_d)
+
+# [例題：Flog問題(EDPC_A-Frog1)](https://atcoder.jp/contests/dp/tasks/dp_a)
+
+![w:900](img/Frog_problem.png)
+
+---
+
+カエルは、ある足場にいるときに2通りの選択肢を選んでいく。
+- 足場iからi+1へと移動する場合 (コスト|h_i-h_i+1|)
+- 足場iからi+2へと移動する場合 (コスト|h_i-h_i+2|)
+ 
+行動後のコストの最小値をメモするように残していく **(=最小化問題)**
+
+
+なお、これは、足場を頂点、コストを辺の重みとすると、
+「頂点1から頂点Nまで進む方法のうち、辿った辺の重みの総和の最小値を求める」
+グラフ問題ととらえることもできます。
+
+---
+最小化問題のため、メモ用の1次元配列dp(N)は十分大きい数INFで初期化。
+スタート地点dp[0]のコストを0とする。
+
+```c++
+// 初期化
+vector<ll> dp(N,INF);
+dp[0] = 0;
+```
+![img](img/Frog_dp_init.png)
+
+---
+ある足場iにいるときに2通りの選択肢を選んでいく。
+- 足場iからi+1へと移動する場合 (コスト|h_i-h_i+1|)
+- 足場iからi+2へと移動する場合 (コスト|h_i-h_i+2|)
+```c++
+// 配るDP
+rep(i,N-1){
+    dp[i+1] = min(dp[i]+abs(h[i+1]-h[i]),dp[i+1]);           // i+1
+    if(i+2<N) dp[i+2] = min(dp[i]+abs(h[i+2]-h[i]),dp[i+2]); // i+2
+}
+```
+![w:500](img/Frog_dp_simple.png)
+
+---
+```c++
+// 省略
+using ll = long long;
+#define rep(i, n) for (ll i = 0; i < (ll)(n); ++i)
+int main(){
+    int N;
+    cin >> N;
+    vector<int> h(N);
+    rep(i,N) cin >> h[i];
+
+    // 初期化
+    vector<ll> dp(N,INF);
+    dp[0] = 0;
+
+    // 配るDP
+    rep(i,N-1){
+        dp[i+1] = min(dp[i]+abs(h[i+1]-h[i]),dp[i+1]);           // i+1
+        if(i+2<N) dp[i+2] = min(dp[i]+abs(h[i+2]-h[i]),dp[i+2]); // i+2
+    }
+    cout << dp[N-1] << endl;
+}
+```
+---
+# 緩和処理
+一般に、グラフ上で頂点uから頂点vへと遷移する辺があって、その遷移のコストをcとするとき、
+```c++
+dp[v]=min(dp[v],dp[u]+c);
+chmin(dp[v],dp[u]+c);
+```
+とする処理を、その辺に関する緩和（relaxation）といいます。
+
+緩和の処理のためにはテンプレート関数を使用すると便利。
+```c++
+template<class T> void chmax(T& a, T b) { if (a < b) a = b; }
+template<class T> void chmin(T& a, T b) { if (a > b) a = b; }
+```
+
+---
+# 配るDPと貰うDP
+ある頂点iに着目すると、DPは2通りの考え方での実装ができる。
+
+- 頂点iに向かって来る遷移を考える：貰う遷移方式
+- 頂点iから伸びていく遷移を考える：配る遷移方式
+
+---
+Flog問題を貰うDPで記載した場合
+```c++
+// 貰うDP
+for(int i=1;i<N;++i){
+    dp[i] = min(dp[i-1]+abs(h[i]-h[i-1]),dp[i]);         // i+1
+    if(i>1) dp[i] = min(dp[i-2]+abs(h[i]-h[i-2]),dp[i]); // i+2
+}
+```
+
+Flog問題を配るDPで記載した場合
+```c++
+// 配るDP
+for(int i=0;i<N-1;++i){
+    dp[i+1] = min(dp[i]+abs(h[i+1]-h[i]),dp[i+1]);           // i+1
+    if(i+2<N) dp[i+2] = min(dp[i]+abs(h[i+2]-h[i]),dp[i+2]); // i+2
+}
+```
+
+---
+
+# [例題：ABC261_D_Flipping and Bonus](https://atcoder.jp/contests/abc261/tasks/abc261_d)
 
 高橋君が N 回コイントスを行います。 また、高橋君はカウンタを持っており、最初カウンタの数値は 0 です。 i 回目のコイントスで表裏のどちらが出たかによって、次のことが起こります。
 - 表が出たとき：高橋君はカウンタの数値を 1 増やし、X_i円もらう。
@@ -59,8 +168,6 @@ _footer: 'Photo by https://www.pakutaso.com/'
 
 また、M 種類の連続ボーナスがあり、i 種類目の連続ボーナスではカウンタの数値が CiになるたびにYi円もらうことができます。
 高橋君は最大で何円もらうことができるかを求めてください。
-
-参考：[iwasa提出コード](https://github.com/iwatadive28/ProgrammingContest/blob/main/ABC/ABC261/D.cpp)
 
 ---
 貰えるお金は試行回数とカウンタの数値で決まる。
@@ -93,7 +200,7 @@ rep(i,N){
     }
 }
 ```
-![bg right:40% 100%](img/ABC261_D_simple.png)
+![bg right:40% 90%](img/ABC261_D_simple.png)
 
 ---
 
@@ -107,28 +214,62 @@ rep(i,N){
 出力例1
 > 48
 
-![bg right:70% 90%](img/ABC261_D_sample1.png)
+![bg right:60% 90%](img/ABC261_D_sample1.png)
 
 ---
-# Flog問題
+```c++
+// 省略
+using ll = long long;
+#define rep(i, n) for (ll i = 0; i < (ll)(n); ++i)
+
+int main(){
+    // 入力
+    int N,M;
+    cin >> N >> M;
+    vector<int> X(N),CY(N+1,0);
+    rep(i,N) cin >> X[i];
+    rep(i,M){
+        int c,y;
+        cin >> c >> y;
+        CY[c] = y;
+    }    
+
+    // 初期化
+    vector<vector<ll>> dp(N+1,vector<ll>(N+1,-1));
+    dp[0][0] = 0;
+    
+    // 配るDP
+    rep(i,N){
+        rep(j,N){
+            if(dp[i][j]==-1) continue;            
+            dp[i+1][j+1] = dp[i][j]+X[i]+CY[j+1];   // 表の場合
+            dp[i+1][0]   = max(dp[i+1][0],dp[i][j]);// 裏の場合
+        }
+    }
+    ll ans = -1;
+    rep(j,N+1) ans = max(ans,dp[N][j]);
+    cout << ans << endl;    
+}
+```
+[iwasa提出コード](https://github.com/iwatadive28/ProgrammingContest/blob/main/ABC/ABC261/D.cpp)
+
 
 ---
-# 配るDPと貰うDP
+# 例題：ナップサック問題 (未)
+
+資料間に合わず。本やアルゴ式、EDPCを参照ください。
 
 ---
-# ナップサック問題
+# 例題：編集距離を求める問題 (未)
 
+資料間に合わず。本やアルゴ式、EDPCを参照ください。
 
----
-# 編集距離を求める問題
-
----
 
 ---
 # まとめ
 
 複雑な問題をシンプルな部分問題に上手に分解することがポイントです。
-設計手法に慣れましょう。
+設計手法に慣れましょう（自分に言い聞かせてます）！
 
 - [アルゴ式](https://algo-method.com/courses/7)：この本の著者の管理する学習コンテンツ
-- [EPDC](https://atcoder.jp/contests/dp)：解き進めましょう
+- [EPDC](https://atcoder.jp/contests/dp)：DPコンテストです。解き進めましょう！
