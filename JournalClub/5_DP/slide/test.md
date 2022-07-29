@@ -9,7 +9,7 @@ _color: white
 _footer: 'Photo by https://www.pakutaso.com/'
 -->
 ![bg brightness:0.6](img/cat_pc.jpg.webp)
-# アルゴリズムとデータ構造<br>動的計画法 <!-- omit in toc -->
+# アルゴリズムとデータ構造<br>第5章 動的計画法 <!-- omit in toc -->
 
 ---
 ![bg right:40% 80% ](img/book.jpg)
@@ -20,7 +20,9 @@ _footer: 'Photo by https://www.pakutaso.com/'
 - [緩和処理](#緩和処理)
 - [配るDPと貰うDP](#配るdpと貰うdp)
 - [例題：ABC261_D_Flipping and Bonus](#例題abc261_d_flipping-and-bonus)
-- [例題：ナップサック問題 (未)](#例題ナップサック問題-未)
+- [例題：ナップサック問題](#例題ナップサック問題)
+  - [動的計画法の部分問題の作り方](#動的計画法の部分問題の作り方)
+  - [ナップサック問題に対する動的計画法](#ナップサック問題に対する動的計画法)
 - [例題：編集距離を求める問題 (未)](#例題編集距離を求める問題-未)
 - [まとめ](#まとめ)
 
@@ -255,11 +257,59 @@ int main(){
 
 
 ---
-# 例題：ナップサック問題 (未)
+# 例題：ナップサック問題
 
-資料間に合わず。本やアルゴ式、EDPCを参照ください。
+N個の品物があり、i(=0,1,...,N-1)番目の品物の重さはweight_i, 価値はvalue_iで与えられます。
+このN個の品物から、重さの総和がWを超えないように、いくつか選びます。選んだ品物の価値として最大値を求めてください。ただし、Wやweight_iは整数とします。
 
 ---
+
+## 動的計画法の部分問題の作り方
+> N個の対象物{0,1,...,N-1}に関する問題に対して、最初のiこの対象物{0,1,...,i-1}に関する問題を部分問題として考えます。
+
+「各段階において、いくつかの選択肢が存在する」
+→ 動的計画法を有効に適用できそうだ！ということを示している。
+
+今回は、あるi番目の品物を選ぶ場合、選ばない場合の2通りの問題として考えると、動的計画法が有効であると分かる。
+
+---
+
+## ナップサック問題に対する動的計画法
+> dp[i][w]：最初のi個の品物{0,1,...,i-1}までの中から重さがwを超えないように選んだ時の、価値の総和の最大値。
+
+![image](img/Napsuck_dp.png)
+
+---
+```c++
+// 省略
+using ll = long long;
+#define rep(i, n) for (ll i = 0; i < (ll)(n); ++i)
+template<class T> void chmax(T& a, T b) { if (a < b) a = b; }
+template<class T> void chmin(T& a, T b) { if (a > b) a = b; }
+
+int main(){
+    ll N,W;
+    cin >> N >> W;
+    vector<ll> w(N),v(N);
+    rep(i,N)  cin >> w[i] >> v[i];
+   
+    // 初期化 
+    vector<vector<ll>> dp(N+1,vector<ll>(W+1,0));
+    
+    // 配るDP
+    rep(i,N){
+        rep(j,W){
+            // 品物を選ばない場合
+            chmax(dp[i+1][j],dp[i][j]);
+            // 品物を選ぶ場合
+            if(j+w[i]<=W) chmax(dp[i+1][j+w[i]],dp[i][j]+v[i]);
+        }        
+    }
+    cout << dp[N][W] << endl;
+}
+```
+---
+
 # 例題：編集距離を求める問題 (未)
 
 資料間に合わず。本やアルゴ式、EDPCを参照ください。
@@ -271,5 +321,6 @@ int main(){
 複雑な問題をシンプルな部分問題に上手に分解することがポイントです。
 設計手法に慣れましょう（自分に言い聞かせてます）！
 
-- [アルゴ式](https://algo-method.com/courses/7)：この本の著者の管理する学習コンテンツ
-- [EPDC](https://atcoder.jp/contests/dp)：DPコンテストです。解き進めましょう！
+- [典型的な DP (動的計画法) のパターンを整理](https://qiita.com/drken/items/a5e6fe22863b7992efdb)：この本の著者、けんちょんさんのQiita記事です。ここに本に記載されている内容がまとまってます。
+- [アルゴ式](https://algo-method.com/courses/7)：けんちょんさんの管理する学習コンテンツ。
+- [EPDC](https://atcoder.jp/contests/dp)：DPのコンテストです。解き進めましょう！
