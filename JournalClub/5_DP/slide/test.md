@@ -29,7 +29,7 @@ _footer: 'Photo by https://www.pakutaso.com/'
 ---
 # 動的計画法とは？
 
-動的計画法（dynamic prigramming,DP）はアルゴリズム設計技法の一つです。
+動的計画法（dynamic programming,DP）はアルゴリズム設計技法の一つです。
 
 一言で言えば、**「与えられた問題全体を一連の部分問題に上手に分解し、各部分問題に対する解をメモ化しながら、小さな部分問題からより大きな部分問題へと順に解を求めていく手法」** です。
 
@@ -323,4 +323,4 @@ int main(){
 
 - [典型的な DP (動的計画法) のパターンを整理](https://qiita.com/drken/items/a5e6fe22863b7992efdb)：この本の著者、けんちょんさんのQiita記事です。ここに本に記載されている内容がまとまってます。
 - [アルゴ式](https://algo-method.com/courses/7)：けんちょんさんの管理する学習コンテンツ。
-- [EPDC](https://atcoder.jp/contests/dp)：DPのコンテストです。解き進めましょう！
+- [EDPC](https://atcoder.jp/contests/dp)：DPのコンテストです。第9回の輪講でみんなで気になる問題を持ち寄りましょう。
