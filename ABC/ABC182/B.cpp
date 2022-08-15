@@ -16,17 +16,24 @@ const ll MOD = 1000000007; //10^9 + 7
 */
 //
 int main(){
-    ll N,X;
-    cin >> N >> X;
-    vector<ll> x(N+1);
-    rep(i,N) cin >> x[i];
-    x[N] = X;
-    
-    sort(x.begin(),x.end());
-    ll ans = x[1] - x[0];
-    for(ll i=1;i<N;++i){
-        ll d = x[i+1]-x[i];
-        ans = GCD(ans,d);
+    int N;
+    cin >> N;
+    vector<int> A(N);
+    int M = 0;
+    rep(i,N){
+        cin >> A[i];
+        chmax(M,A[i]);
     }
-    cout << ans << endl;    
+
+    int ans = 0;
+    int cmx = 0;
+    for(int j=2;j<=M;++j){
+        int cnt = 0;
+        rep(i,N) if(A[i]%j==0) cnt ++;
+        if(cnt>cmx){
+            ans = j;
+            cmx = cnt;
+        }
+    }
+    cout << ans << endl;
 }

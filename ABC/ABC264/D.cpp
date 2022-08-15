@@ -16,17 +16,22 @@ const ll MOD = 1000000007; //10^9 + 7
 */
 //
 int main(){
-    ll N,X;
-    cin >> N >> X;
-    vector<ll> x(N+1);
-    rep(i,N) cin >> x[i];
-    x[N] = X;
+    string ref = "atcoder";
+    string S;
+    cin >> S;
+    vector<int> idx(7);
+    rep(i,7) rep(j,7) if(ref[i]==S[j]) idx[i]=j;
     
-    sort(x.begin(),x.end());
-    ll ans = x[1] - x[0];
-    for(ll i=1;i<N;++i){
-        ll d = x[i+1]-x[i];
-        ans = GCD(ans,d);
-    }
-    cout << ans << endl;    
+    ll ans = 0;    
+    rep(ii,7){
+        int tmp = idx[ii];
+        while(S[ii]!=ref[ii]){
+            swap(S[tmp],S[tmp-1]);
+            tmp--;
+            ans++;
+        }
+        rep(i,7) rep(j,7) if(ref[i]==S[j]) idx[i]=j;
+    }   
+
+    cout << ans << endl;
 }

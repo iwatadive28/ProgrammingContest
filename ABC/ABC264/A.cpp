@@ -16,17 +16,11 @@ const ll MOD = 1000000007; //10^9 + 7
 */
 //
 int main(){
-    ll N,X;
-    cin >> N >> X;
-    vector<ll> x(N+1);
-    rep(i,N) cin >> x[i];
-    x[N] = X;
-    
-    sort(x.begin(),x.end());
-    ll ans = x[1] - x[0];
-    for(ll i=1;i<N;++i){
-        ll d = x[i+1]-x[i];
-        ans = GCD(ans,d);
+    string S = "atcoder";
+    int L,R;
+    cin >> L >> R;
+    for(int i=L-1;i<R;++i){
+        cout << S[i];
     }
-    cout << ans << endl;    
+    cout << endl;   
 }
