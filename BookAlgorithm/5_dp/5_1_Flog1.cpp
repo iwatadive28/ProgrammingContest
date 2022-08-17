@@ -18,5 +18,21 @@ const ll MOD = 1000000007; //10^9 + 7
 int main(){
     int N;
     cin >> N;
-    cout << (N%2==0?"White":"Black") << endl;
+    vector<int> h(N);
+    rep(i,N) cin >> h[i];
+
+    // 初期化
+    vector<ll> dp(N,INF);
+    dp[0] = 0;
+
+    // 配るDP
+    rep(i,N-1){
+        // i+1
+        dp[i+1] = min(dp[i]+abs(h[i+1]-h[i]),dp[i+1]);
+        // i+2
+        if(i+2<N){
+            dp[i+2] = min(dp[i]+abs(h[i+2]-h[i]),dp[i+2]);
+        }        
+    }
+    cout << dp[N-1] << endl;
 }

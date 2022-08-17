@@ -16,7 +16,17 @@ const ll MOD = 1000000007; //10^9 + 7
 */
 //
 int main(){
-    int N;
+    ll N;
     cin >> N;
-    cout << (N%2==0?"White":"Black") << endl;
+    vector<ll> ans;
+    for(ll i=1;i<=sqrt(N);++i){
+        if(N%i==0){
+            ans.push_back(i);
+            if(i!=sqrt(N)) ans.push_back(N/i);
+        }
+    }
+    sort(ans.begin(),ans.end());
+    for(auto a:ans){
+        cout << a << endl;
+    }    
 }

@@ -18,5 +18,19 @@ const ll MOD = 1000000007; //10^9 + 7
 int main(){
     int N;
     cin >> N;
-    cout << (N%2==0?"White":"Black") << endl;
+    vector<ll> x(N);
+    rep(i,N) cin >> x[i];
+
+    ll dm = 0, dc = 0;
+    ll dj1 = 0;
+    rep(i,N){
+        dm += abs(x[i]);
+        chmax(dc,abs(x[i]));
+        dj1 += x[i]*x[i];
+    }
+    double dj = sqrt(dj1);
+
+    cout << dm << endl;
+    printf("%.9f\n",dj);
+    cout << dc << endl;
 }

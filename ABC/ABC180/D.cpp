@@ -16,7 +16,14 @@ const ll MOD = 1000000007; //10^9 + 7
 */
 //
 int main(){
-    int N;
-    cin >> N;
-    cout << (N%2==0?"White":"Black") << endl;
+    ll X,Y,A,B;
+    cin >> X >> Y >> A >> B;
+    ll ans = 0;
+    while((double)A*X<=2e18 && X*A<=X+B && A*X<Y){
+        X*=A;
+        ans++;
+    }
+    ans += (Y-1-X)/B;
+        
+    cout << ans << endl;
 }

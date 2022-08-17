@@ -16,7 +16,7 @@ const ll MOD = 1000000007; //10^9 + 7
 */
 //
 int main(){
-    int N;
-    cin >> N;
-    cout << (N%2==0?"White":"Black") << endl;
+    int N,A,B;
+    cin >> N >> A >> B;
+    cout << N-A+B << endl;
 }

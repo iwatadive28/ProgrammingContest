@@ -15,8 +15,28 @@ const ll MOD = 1000000007; //10^9 + 7
 /*
 */
 //
+
 int main(){
     int N;
     cin >> N;
-    cout << (N%2==0?"White":"Black") << endl;
+    vector<vector<int>> a(N,vector<int>(3));
+    rep(i,N){
+        rep(j,3) cin >> a[i][j];
+    }
+    
+    // 初期化
+    vector<vector<ll>> dp(N+1,vector<ll>(3,-1));
+    rep(j,3) dp[0][j] = 0;
+    
+    // 配るDP
+    rep(i,N){
+        rep(j,3){
+            chmax(dp[i+1][(j+1)%3],dp[i][j]+a[i][(j+1)%3]);
+            chmax(dp[i+1][(j+2)%3],dp[i][j]+a[i][(j+2)%3]);
+        }        
+    }
+
+    ll ans = 0;
+    rep(j,3) chmax(ans,dp[N][j]);
+    cout << ans << endl;
 }

@@ -578,9 +578,8 @@ int main (){
 # 参考リンク
 
 
-- 参考：[DFS (深さ優先探索) 超入門！ 〜 グラフ・アルゴリズムの世界への入口 〜【前編】](https://qiita.com/drken/items/4a7869c5e304883f539b)
-  けんちょん(@darken)さんのQiita記事です。
-- 最近出題された問題(ABC259-D)
+- [DFS (深さ優先探索) 超入門！ 〜 グラフ・アルゴリズムの世界への入口 〜【前編】](https://qiita.com/drken/items/4a7869c5e304883f539b) (けんちょん(@darken)さんのQiita記事です)
+- 最近出題された問題([ABC259-D](https://atcoder.jp/contests/abc259/tasks/abc259_d))
 - 経路問題
   - グリッドグラフの経路: [AtCoder Typical Contest A - 深さ優先探索](https://atcoder.jp/contests/atc001/tasks/dfs_a)
 - 連結成分の個数を求める問題
