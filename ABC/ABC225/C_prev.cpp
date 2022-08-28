@@ -17,29 +17,26 @@ int main() {
     vector<vector<ll>> B(N,vector<ll>(M));
     rep(i,N) rep(j,M) cin >> B[i][j];
     
-    ll ja = (B[0][0]-1)%7;
-    ll ia = (B[0][0]-1)/7;
-    vector<vector<ll>> A(N,vector<ll>(M));
-
+    ll j1;
+    if (B[0][0]%7==0) j1 = 7;
+    else              j1 = B[0][0]%7;
+    ll i1;
+    if (B[0][0]%7==0) i1 = B[0][0]/7-1;
+    else              i1 = B[0][0]/7;
+    cout << endl;
+    // O(7*10^4)
     bool ans = true;
-    if(ja+M>7) ans = false;
-    // O(7*10^4)
     rep(i,N){
         rep(j,M){
-            ll a = (i+ia)*7+(ja+j+1);
-            A[i][j] = a;
-        }
-    }
-
-    // rep(i,N) {rep(j,M){cout << A[i][j] << " ";}cout << endl;};
-
-    // O(7*10^4)
-    rep(i,N){
-        rep(j,M){
-            if (B[i][j] != A[i][j]){                
+            ll tmp = ((i1+i)*7)+(j1+j);
+            cout << tmp << " ";
+            if (B[i][j] != tmp){                
                 ans = false;
+                break;
             }
         }
+        cout << endl;
+        if(!ans) break;                
     }
     cout << (ans?"Yes":"No") << endl;    
 }
