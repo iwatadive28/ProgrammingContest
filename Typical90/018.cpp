@@ -25,6 +25,7 @@ int main(){
     rep(i,Q){
         ll E;
         cin >> E;
+        // 三角関数
         double theta = (double)(E%T)/T * 2*pi;
         double y = -r*sin(theta);
         double z = -r*cos(theta)+r;
