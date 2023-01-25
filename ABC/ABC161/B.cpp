@@ -18,7 +18,17 @@ const ll MOD = 1000000007; //10^9 + 7
 int main(){
     int N,M;
     cin >> N >> M;
+    vector<int> A(N);
+    int sum = 0;
+    rep(i,N){
+        cin >> A[i];
+        sum += A[i];
+    }
     
-    int ans = N*(N-1)/2 + M*(M-1)/2;
-    cout << ans << endl;
+    int cnt = 0;
+    rep(i,N){
+        if(4*M*A[i]>=sum) cnt++;
+    }
+    
+    cout << (cnt>=M?"Yes":"No") << endl;
 }

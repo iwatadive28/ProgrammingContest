@@ -15,10 +15,23 @@ const int INF = 1000000000;
 const ll MOD = 1000000007; //10^9 + 7
 /*
 */
-int main(){
-    int N,M;
-    cin >> N >> M;
+bool kaibun(string s){
+    ll M = s.size();
+    if(M <= 1)  return true;   
     
-    int ans = N*(N-1)/2 + M*(M-1)/2;
-    cout << ans << endl;
+    rep(i,M/2){
+        if (s[i] != s[M-1-i]) return false;
+    }
+    return true;
+}
+
+int main(){
+    string S;
+    cin >> S;
+    int N = S.length();
+    bool ans = false;
+    if(kaibun(S) && kaibun(S.substr(0,N/2)) && kaibun(S.substr(N/2+1,N))){
+        ans = true;
+    }
+    cout << (ans?"Yes":"No") << endl;
 }
