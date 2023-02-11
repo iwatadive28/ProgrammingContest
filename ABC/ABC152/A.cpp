@@ -1,6 +1,6 @@
 #include <iostream>
 #include <bits/stdc++.h>
-#include <math.h> 
+#include <math.h>
 
 using namespace std;
 using ll = long long;
@@ -18,10 +18,8 @@ const double pi = 3.14159265358979;
 */
 
 int main(){
-    ll W,N;
-    cin >> W >> N;
-    vector<ll> L(N,0),R(N,0);
-    rep(i,N) cin >> L[i] >> R[i];
+    ll N,M;
+    cin >> N >> M; 
+    cout << (N==M?"Yes":"No") << endl;
     
-    rep(i,N) cout <<  << endl;
 }

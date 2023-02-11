@@ -26,5 +26,6 @@ int main(){
         if(i<K) ans[i] = S;
     }
     sort(ans.begin(),ans.end());
+    
     rep(i,K) cout << ans[i] << endl;
 }
