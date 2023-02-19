@@ -16,17 +16,32 @@ const ll MOD = 1000000007; //10^9 + 7
 const double pi = 3.14159265358979;
 /*
 */
+ll gcd(ll a, ll b){
+  if(a%b == 0){
+    return b;
+  }else{
+    return gcd(b, a%b);
+  }
+}
+
+ll lcm(ll a, ll b){
+  return a*b / gcd(a, b);
+}
+
+
+ll solve(){
+    ll N,D,K;
+    cin >> N >> D >> K;
+    ll res;
+    res = D*(K-1)%N;
+    res +=D*(K-1)/lcm(N,D);
+    return res;
+}
 
 int main(){
-    ll N;
-    cin >> N;
-    
-    ll mn = INF;
-    ll ans = 0;
-    rep(i,N){
-        ll p;
-        cin >> p;    
-        if(chmin(mn,p)) ans++;
-    }
-    cout << ans << endl;
+    ll T;
+    cin >> T;
+    vector<ll> ans;
+    rep(i,T) ans.push_back(solve());   
+    rep(i,T) cout << ans[i] << endl;
 }

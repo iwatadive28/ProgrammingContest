@@ -18,15 +18,33 @@ const double pi = 3.14159265358979;
 */
 
 int main(){
-    ll N;
-    cin >> N;
+    int N;
+    cin >> N;    
+    vector<int> A(N);
+    rep(i,N) cin >> A[i];   
     
-    ll mn = INF;
-    ll ans = 0;
-    rep(i,N){
-        ll p;
-        cin >> p;    
-        if(chmin(mn,p)) ans++;
+    int M;
+    cin >> M;
+    vector<int> B(M,0);
+    rep(i,M) cin >> B[i];
+
+    int X;
+    cin >> X;
+    
+    vector<bool> mochi(X,false);
+    rep(i,M) mochi[B[i]] = true;
+
+    vector<bool> dp(X+1,false);
+    dp[0] = true;
+
+    rep(i,X){
+        if(!dp[i]) continue;
+        rep(j,N){
+            int nx = i+A[j];
+            if(nx<=X && !mochi[nx]) dp[nx] = true;
+        }
     }
-    cout << ans << endl;
+
+
+    cout << (dp[X]?"Yes":"No") << endl;
 }

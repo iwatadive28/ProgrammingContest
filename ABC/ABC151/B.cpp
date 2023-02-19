@@ -18,15 +18,16 @@ const double pi = 3.14159265358979;
 */
 
 int main(){
-    ll N;
-    cin >> N;
+    int N,K,M;
+    cin >> N >> K >> M;
     
-    ll mn = INF;
-    ll ans = 0;
-    rep(i,N){
-        ll p;
-        cin >> p;    
-        if(chmin(mn,p)) ans++;
+    int sum = 0;
+    rep(i,N-1){
+        int a;
+        cin >> a;
+        sum += a;
     }
-    cout << ans << endl;
+
+    int ans = max(N*M-sum,0);
+    cout << (K<ans?-1:ans) << endl;
 }

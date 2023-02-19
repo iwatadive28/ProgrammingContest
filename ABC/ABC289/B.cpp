@@ -18,15 +18,19 @@ const double pi = 3.14159265358979;
 */
 
 int main(){
-    ll N;
-    cin >> N;
-    
-    ll mn = INF;
-    ll ans = 0;
-    rep(i,N){
-        ll p;
-        cin >> p;    
-        if(chmin(mn,p)) ans++;
+    ll N,M;
+    cin >> N >> M;
+    vector<ll> A(M,0);
+    rep(i,M) cin >> A[i];
+
+    vector<bool> re(N+1,false);
+    rep(i,M) re[A[i]] = true;
+
+    vector<ll> ans;
+    for(ll i=1,j=1;i<=N;i = ++j){
+        while(re[j]) j++;
+        for(ll k=j;k>=i;k--) ans.push_back(k);
     }
-    cout << ans << endl;
+
+    rep(i,N) cout << ans[i] << endl;
 }

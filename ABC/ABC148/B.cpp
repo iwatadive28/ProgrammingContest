@@ -18,15 +18,12 @@ const double pi = 3.14159265358979;
 */
 
 int main(){
-    ll N;
+    int N;
     cin >> N;
-    
-    ll mn = INF;
-    ll ans = 0;
+    string S,T;
+    cin >> S >> T;
     rep(i,N){
-        ll p;
-        cin >> p;    
-        if(chmin(mn,p)) ans++;
+        cout << S[i] << T[i];
     }
-    cout << ans << endl;
+    cout << endl;
 }

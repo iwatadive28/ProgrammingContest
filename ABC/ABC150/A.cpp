@@ -18,15 +18,7 @@ const double pi = 3.14159265358979;
 */
 
 int main(){
-    ll N;
-    cin >> N;
-    
-    ll mn = INF;
-    ll ans = 0;
-    rep(i,N){
-        ll p;
-        cin >> p;    
-        if(chmin(mn,p)) ans++;
-    }
-    cout << ans << endl;
+    ll K,X;
+    cin >> K >> X;
+    cout << (500*K>=X?"Yes":"No") << endl;
 }

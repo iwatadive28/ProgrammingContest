@@ -18,15 +18,19 @@ const double pi = 3.14159265358979;
 */
 
 int main(){
-    ll N;
-    cin >> N;
-    
-    ll mn = INF;
-    ll ans = 0;
+    ll N,K;
+    cin >> N >> K;
+    string S;
+    cin >> S;
+
+    string ans;
     rep(i,N){
-        ll p;
-        cin >> p;    
-        if(chmin(mn,p)) ans++;
+        if(S[i]=='o' && K>0){
+            ans+='o';
+            K--;
+        }else{
+            ans+='x';
+        }
     }
     cout << ans << endl;
 }

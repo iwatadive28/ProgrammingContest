@@ -16,17 +16,21 @@ const ll MOD = 1000000007; //10^9 + 7
 const double pi = 3.14159265358979;
 /*
 */
-
 int main(){
-    ll N;
-    cin >> N;
-    
-    ll mn = INF;
+    ll N,K;
+    cin >> N >> K;
+    vector<ll> A(N,0);
+    rep(i,N) cin >> A[i];
+    sort(A.begin(),A.end());
+
+   
     ll ans = 0;
-    rep(i,N){
-        ll p;
-        cin >> p;    
-        if(chmin(mn,p)) ans++;
+    rep(i,A.size()){
+        if(A[i]==ans && K>0){
+            ans++;
+            K--;
+        }
     }
     cout << ans << endl;
+    // */
 }

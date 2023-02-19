@@ -20,13 +20,21 @@ const double pi = 3.14159265358979;
 int main(){
     ll N;
     cin >> N;
+    vector<int> A(N,0);
+    rep(i,N) cin >> A[i];
     
-    ll mn = INF;
     ll ans = 0;
-    rep(i,N){
-        ll p;
-        cin >> p;    
-        if(chmin(mn,p)) ans++;
-    }
+    for(int i=0;i<N-1;++i){
+        for(int j=i+1;j<N;++j){
+            ll M = j-i+1;
+            ll res = 0;
+            if(M > 1){
+                rep(k,M/2){
+                    if (A[i+k] != A[i+M-1-k]) res++;
+                }
+            }
+            ans += res;            
+        }
+    }    
     cout << ans << endl;
 }

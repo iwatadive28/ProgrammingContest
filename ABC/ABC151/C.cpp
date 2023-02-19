@@ -18,15 +18,29 @@ const double pi = 3.14159265358979;
 */
 
 int main(){
-    ll N;
-    cin >> N;
+    ll N,M;
+    cin >> N >> M;
     
-    ll mn = INF;
-    ll ans = 0;
-    rep(i,N){
-        ll p;
-        cin >> p;    
-        if(chmin(mn,p)) ans++;
+    vector<bool> AC(N+1,false);
+    vector<ll>   NG(N+1,0);
+    
+    rep(i,M){
+        ll p; 
+        string s;
+        cin >> p >> s;
+        if(AC[p]) continue;
+
+        if(s=="AC") AC[p] = true;
+        else        NG[p]++;
     }
-    cout << ans << endl;
-}
+
+    ll cntAC = 0;
+    ll cntNG = 0;
+    rep(i,N+1){
+        if(AC[i]){
+            cntAC++;
+            cntNG+= NG[i];
+        }
+    }
+    cout << cntAC << " " << cntNG << endl;
+}       

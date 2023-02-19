@@ -16,17 +16,24 @@ const ll MOD = 1000000007; //10^9 + 7
 const double pi = 3.14159265358979;
 /*
 */
+ll gcd(ll a, ll b){
+  if(a%b == 0){
+    return b;
+  }else{
+    return gcd(b, a%b);
+  }
+}
 
 int main(){
-    ll N;
-    cin >> N;
-    
-    ll mn = INF;
+    ll K;
+    cin >> K;
     ll ans = 0;
-    rep(i,N){
-        ll p;
-        cin >> p;    
-        if(chmin(mn,p)) ans++;
+    rep(a,K){
+        rep(b,K){
+            rep(c,K){
+                ans += gcd(gcd(a+1,b+1),c+1);
+            }
+        }
     }
     cout << ans << endl;
 }
