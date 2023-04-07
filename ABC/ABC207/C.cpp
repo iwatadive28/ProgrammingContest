@@ -19,22 +19,28 @@ int main(){
     int N;
     cin >> N;
 
-    vector<pair<ll,ll>> lr(N);
+    vector<pair<double,double>> lr;
     rep(i,N){
         int t;
-        ll l,r;
+        double l,r;
         cin >> t >> l >> r;
-        if (t==3) l++;
-        else if(r==4) l++;
-        lr[i] = make_pair(l,r);
+        
+        if     (t==2) {r-=0.1;}
+        else if(t==3) {l+=0.1;}
+        else if(t==4) {l+=0.1;r-=0.1;}
+        lr.push_back({l,r});
     }
+    
     sort(lr.begin(),lr.end());
+    // rep(i,N) cout << lr[i].first << " " << lr[i].second << endl;
 
     int ans = 0;
     for(int i=0;i<N-1;++i){
         for(int j=i+1;j<N;++j){
-            if(lr[i].second < lr[j].first) continue;
-            ans++;
+            double ri = lr[i].second;
+            double lj = lr[j].first;
+
+            if(ri>=lj) ans++;
         }
     }
     cout << ans << endl;
