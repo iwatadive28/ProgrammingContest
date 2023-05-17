@@ -16,19 +16,31 @@ const ll MOD = 1000000007; //10^9 + 7
 const double pi = 3.14159265358979;
 /*
 */
+ll A,B,X;
+
+ll keta(ll x){
+   ll n = 0;
+   while(x>0){
+       n++; x/=10;
+   }
+   return n;
+}
+
+ll func(ll n){
+    ll res = A*n+B*keta(n);
+    return res;
+}
 
 int main(){
-    ll N;
-    cin >> N;
-    vector<ll> A(N,0);
-    rep(i,N) cin >> A[i];
+    cin >> A >> B >> X;
     
-    ll cnt = 1;
-    ll ans = 0;
-    rep(i,N){
-        if(A[i]==cnt) cnt++;
-        else ans++;
+    // 二分探索
+    ll ok = 0;
+    ll ng = 1000000001;
+    while(ok+1!=ng){
+        ll mid=(ok+ng)/2;
+        if(func(mid)<=X) ok = mid;
+        else ng = mid;
     }
-    if(cnt==1) ans = -1;
-    cout << ans << endl;
+    cout << ok << endl;
 }

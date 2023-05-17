@@ -18,17 +18,15 @@ const double pi = 3.14159265358979;
 */
 
 int main(){
-    ll N;
-    cin >> N;
-    vector<ll> A(N,0);
-    rep(i,N) cin >> A[i];
-    
-    ll cnt = 1;
-    ll ans = 0;
+    int N;
+    string S;
+    cin >> N >> S;
+    map<char,int> mp;
     rep(i,N){
-        if(A[i]==cnt) cnt++;
-        else ans++;
+        mp[S[i]]++;        
     }
-    if(cnt==1) ans = -1;
-    cout << ans << endl;
+    if (mp['T'] > mp['A']) cout << 'T' << endl;
+    else if (mp['T'] < mp['A']) cout << 'A' << endl;
+    else cout << char('T' + 'A' - S.back()) << endl;
+    // */
 }

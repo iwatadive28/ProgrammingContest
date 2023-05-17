@@ -18,17 +18,18 @@ const double pi = 3.14159265358979;
 */
 
 int main(){
-    ll N;
-    cin >> N;
-    vector<ll> A(N,0);
-    rep(i,N) cin >> A[i];
-    
-    ll cnt = 1;
-    ll ans = 0;
+    int N,A,B;
+    cin >> N >> A >> B;
+    int ans = -1;
     rep(i,N){
-        if(A[i]==cnt) cnt++;
-        else ans++;
+        int C;
+        cin >> C;
+        if(A+B==C){
+            ans = i+1;
+            break;
+        }
     }
-    if(cnt==1) ans = -1;
+
     cout << ans << endl;
+
 }

@@ -22,13 +22,12 @@ int main(){
     cin >> N;
     vector<ll> A(N,0);
     rep(i,N) cin >> A[i];
-    
-    ll cnt = 1;
-    ll ans = 0;
-    rep(i,N){
-        if(A[i]==cnt) cnt++;
-        else ans++;
+    vector<ll> ans;
+    rep(i,N-1){
+        if(A[i]<A[i+1]) for (ll j=A[i];j<A[i+1];j++) ans.push_back(j);
+        if(A[i]>A[i+1]) for (ll j=A[i];j>A[i+1];j--) ans.push_back(j);
     }
-    if(cnt==1) ans = -1;
-    cout << ans << endl;
+    ans.push_back(A[N-1]);
+    for(auto a:ans) cout << a << " ";
+    cout << endl;
 }

@@ -20,15 +20,20 @@ const double pi = 3.14159265358979;
 int main(){
     ll N;
     cin >> N;
-    vector<ll> A(N,0);
-    rep(i,N) cin >> A[i];
-    
-    ll cnt = 1;
+    vector<ll> A(N+1,0);
+    rep(i,N+1) cin >> A[i];
+    vector<ll> B(N,0);
+    rep(i,N) cin >> B[i];
+
     ll ans = 0;
     rep(i,N){
-        if(A[i]==cnt) cnt++;
-        else ans++;
+        ll tmp;
+        rep(j,2){
+            tmp = min(A[i+j],B[i]);
+            ans += tmp;
+            A[i+j]-=tmp;
+            B[i]-=tmp;
+        }
     }
-    if(cnt==1) ans = -1;
     cout << ans << endl;
 }

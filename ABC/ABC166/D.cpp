@@ -18,17 +18,22 @@ const double pi = 3.14159265358979;
 */
 
 int main(){
-    ll N;
-    cin >> N;
-    vector<ll> A(N,0);
-    rep(i,N) cin >> A[i];
-    
-    ll cnt = 1;
-    ll ans = 0;
-    rep(i,N){
-        if(A[i]==cnt) cnt++;
-        else ans++;
+    ll X;
+    cin >> X;
+    map<ll,ll> mp;
+    for (ll i=-200; i<=200; i++){
+        mp[i*i*i*i*i] = i;
     }
-    if(cnt==1) ans = -1;
-    cout << ans << endl;
+
+    ll A,B;
+    for(auto a:mp){
+        ll B5 = a.first;
+        B  = a.second;
+
+        if(mp.count(X+B5)){
+            A = mp[X+B5];
+            break;
+        }
+    }
+    cout << A << " " << B <<  endl;
 }

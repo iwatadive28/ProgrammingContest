@@ -18,17 +18,8 @@ const double pi = 3.14159265358979;
 */
 
 int main(){
-    ll N;
-    cin >> N;
-    vector<ll> A(N,0);
-    rep(i,N) cin >> A[i];
-    
-    ll cnt = 1;
-    ll ans = 0;
-    rep(i,N){
-        if(A[i]==cnt) cnt++;
-        else ans++;
-    }
-    if(cnt==1) ans = -1;
+    int A,B,C;
+    cin >> A >> B >> C;
+    int ans = max(0,C-(A-B));
     cout << ans << endl;
 }

@@ -18,17 +18,15 @@ const double pi = 3.14159265358979;
 */
 
 int main(){
-    ll N;
+    int N;
     cin >> N;
-    vector<ll> A(N,0);
+    vector<int> A(N,0);
     rep(i,N) cin >> A[i];
-    
-    ll cnt = 1;
-    ll ans = 0;
-    rep(i,N){
-        if(A[i]==cnt) cnt++;
-        else ans++;
+
+    bool ans = true;
+    rep(i,N-1){
+        if(A[i]<A[i+1]) A[i+1]--;
+        if(A[i]>A[i+1]) ans = false;
     }
-    if(cnt==1) ans = -1;
-    cout << ans << endl;
+    cout << (ans?"Yes":"No") << endl;
 }

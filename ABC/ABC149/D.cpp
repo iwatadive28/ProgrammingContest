@@ -18,17 +18,26 @@ const double pi = 3.14159265358979;
 */
 
 int main(){
-    ll N;
-    cin >> N;
-    vector<ll> A(N,0);
-    rep(i,N) cin >> A[i];
+    int N,K,R,S,P;
+    string T;
+    cin >> N >> K >> R >> S >> P >> T;
     
-    ll cnt = 1;
-    ll ans = 0;
+    map<char,pair<char,int>> mp;
+    mp['r']={'p',P};
+    mp['s']={'r',R};
+    mp['p']={'s',S};
+    
+    vector<char> Q(N);
+    int ans = 0;
     rep(i,N){
-        if(A[i]==cnt) cnt++;
-        else ans++;
+        if(i-K>=0&&Q[i-K]==mp[T[i]].first){
+            if(i+K<N && T[i+K]!=T[i]) Q[i]=T[i+K];
+            else                      Q[i]=T[i];
+            continue;
+        }
+        Q[i]=mp[T[i]].first;
+        ans += mp[T[i]].second;
     }
-    if(cnt==1) ans = -1;
+    // cout << Q << endl;
     cout << ans << endl;
 }

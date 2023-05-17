@@ -18,17 +18,19 @@ const double pi = 3.14159265358979;
 */
 
 int main(){
-    ll N;
-    cin >> N;
-    vector<ll> A(N,0);
-    rep(i,N) cin >> A[i];
-    
-    ll cnt = 1;
-    ll ans = 0;
-    rep(i,N){
-        if(A[i]==cnt) cnt++;
-        else ans++;
+    int H,W;
+    cin >> H >> W;
+    vector<string> A(H),B(H);
+    rep(i,H) cin >> A[i];
+    rep(i,H) cin >> B[i];
+
+    bool ans = false;
+    rep(s,H) rep(t,W){
+        bool tmp = true;
+        rep(i,H) rep(j,W){
+            if(A[(i+s)%H][(j+t)%W] != B[i][j]) tmp = false;
+        }
+        if(tmp) ans = true;
     }
-    if(cnt==1) ans = -1;
-    cout << ans << endl;
+    cout << (ans?"Yes":"No") << endl;    
 }
