@@ -22,14 +22,13 @@ int main(){
     rep(i,N) cin >> A[i];
 
     int ans = 2000000000;
-    for(int i=0;i<N-1;i++){ // 区間 0~i,i+1~N-1
-        vector<int> ord(2,0);
-        rep(j,N){
-            if(j<=i) ord[0] |= A[j];
-            else     ord[1] |= A[j];
+    for(int i=0;i<(1<<N-1);i++){ // 区間 0~i,i+1~N-1
+        int ord  = 0;
+        int xord = 0;
+        rep(j,N+1){
+            if(j<N) ord |= A[j];
+            if(j==N||(i>>j&1)) xord ^= ord,ord =0;
         }
-        int xord = ord[0] ^ ord[1];
-        
         ans = min(xord,ans);
     }
     cout << ans << endl;
