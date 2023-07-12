@@ -1,0 +1,198 @@
+{
+    "header": {
+      "prefix": "header",
+      "body": [
+        "#include <iostream>",
+        "#include <bits/stdc++.h>",
+        "#include <math.h>",
+        "",
+        "using namespace std;",
+        "using ll = long long;",
+        "using ull = unsigned long long;",
+        "using Graph = vector<vector<int>>;",
+        "",
+        "#define rep(i, n) for (ll i = 0; i < (ll)(n); ++i)",
+        "template<class T> bool chmax(T& a, T b){if (a<b){a=b;return true;}else{return false;}}",
+        "template<class T> bool chmin(T& a, T b){if (a>b){a=b;return true;}else{return false;}}",
+        "const ll INF = 1LL << 60;  //無限大",
+        "// const int INF = 1000000000;",
+        "const ll MOD = 1000000007; //10^9 + 7",
+        "const double pi = 3.14159265358979;",
+        "/*",
+        "*/",
+        "",
+        "int main(){",
+        "}"
+      ],
+      "description": "競技プロHeader" //任意
+    },
+        
+    "in1": {
+      "prefix": "qin1",
+      "body": [
+        "$1ll $2N;",
+        "cin >> $2N;",
+      ],
+      "description": "single input" //任意
+    },
+
+    "in2": {
+      "prefix": "qin2",
+      "body": [
+        "$1ll $2N,$3M;",
+        "cin >> $2N >> $3M;",
+      ],
+      "description": "double input" //任意
+    },
+
+    "in3": {
+      "prefix": "qin3",
+      "body": [
+        "$1ll $2N,$3M,$4L;",
+        "cin >> $2N >> $3M >> $4L;",
+      ],
+      "description": "3 input" //任意
+    },
+
+    "cout": {
+      "prefix": "qout",
+      "body": [
+        "cout << $1ans << endl;"
+      ],
+      "description": "cout" //任意
+    },
+
+    "cout_YesNo": {
+      "prefix": "qoutb",
+      "body": [
+        "cout << ($1ans?\"Yes\":\"No\") << endl;"
+      ],
+      "description": "coutYesNo" //任意
+    },
+    
+    "for": {
+      "prefix": ["qfor","for"],
+      "body": [
+        "for (ll $1i=0; $1i<=N; $1i++){}"
+      ],
+      "description": "for" //任意
+    },
+
+    "vector": {
+      "prefix": "vec",
+      "body": [
+        "vector<$1ll> $2A($3N,0);",
+        "rep(i,$3N) cin >> $2A[i];"
+      ],
+      "description": "配列" //任意
+    },
+
+    "vector2": {
+      "prefix": "vec2",
+      "body": [
+        "vector<vector<$1ll>>  $2A($3N,vector<$1ll>($4N,0));"
+      ],
+      "description": "二次元配列" //任意
+    },
+    
+    "vector3": {
+      "prefix": "vec3",
+      "body": [
+        "vector<vector<vector<$1>>> $2($3,vector<vector<$1>>($4,vector<$1>($5,$6)));"
+      ],
+      "description": "三次元配列" //任意
+    },
+
+    "Graph Input": {
+      "prefix": "gin",
+      "body": [
+        "Graph G($1N);",
+        "rep(i,$2M){",
+        "   int $3a,$4b;",
+        "   cin >> $3a >> $4b;",
+        "   $3a--;$4b--;",
+        "   G[$3a].push_back($4b);",
+        "   G[$4b].push_back($3a);",
+        "}"
+      ],
+      "description": "Graph input" //任意
+    },
+
+    "mypow": {
+      "prefix": "mypow",
+      "body": [
+        "ll mypow(ll x,ll y){",
+        "    ll res = 1;",
+        "    rep(i,y) res*=x;",
+        "     return res;",
+        "}"
+      ],
+      "description": "mypow" //任意
+    },
+
+    "Union-Find": {
+      "prefix": ["unionfind","quf"],
+      "body": [
+         "// Union-Find",
+         "struct UnionFind{",
+         "    vector<ll> par,siz;",
+         "    // 初期化",
+         "    UnionFind(ll n):par(n,-1),siz(n,1){ }",
+         "    ",
+         "    // 根を求める",
+         "    ll root(ll x){",
+         "        if(par[x]==-1) return x; // xの場合はxを返す",
+         "        else return par[x] = root(par[x]); // 再帰的にxの親の根を返す",
+         "    }",
+         "",
+         "    // xとyが同じグループに属するかどうか(根が一致するかどうか)",
+         "    bool issame(ll x,ll y){",
+         "        return root(x)==root(y);",
+         "    }",
+         "",
+         "    // xを含むグループとyを含むグループとを併合する",
+         "    bool unite(ll x,ll y){",
+         "        // x,yをそれぞれ根まで移動する",
+         "        x = root(x);",
+         "        y = root(y);",
+         "",
+         "        // すでに同じグループの時は何もせず",
+         "        if(x == y) return false;",
+         "",
+         "        // union by size (y側のサイズが小さくなるようにする)",
+         "        if(siz[x]<siz[y]) swap(x,y);",
+         "",
+         "        // yをxの子とする",
+         "        par[y] = x;",
+         "        siz[x] += siz[y];",
+         "        return true;",
+         "    }",
+         "",
+         "    // xを含むグループのサイズ",
+         "    ll size(ll x){",
+         "        return siz[root(x)];",
+         "    }",
+         "};"
+      ],
+      "description": "Union-Find" //任意
+    },
+    "count keta": {
+      "prefix": "keta",
+      "body": [
+        "ll keta(ll x){",
+        "   ll n = 0;",
+        "   while(x>0){",
+        "       n++; x/=10;",
+        "   }",
+        "   return n;",
+        "}"
+      ],
+      "description": "桁数カウント" //任意
+    },
+    "sort": {
+      "prefix": ["qsort","sort"],
+      "body": [
+        "sort($1A.begin(),$1A.end()); // ,greater<ll>()" 
+      ],
+      "description": "sort" //任意
+    }

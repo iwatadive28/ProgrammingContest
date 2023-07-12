@@ -1,0 +1,24 @@
+{
+    "files.associations": {
+        "ostream": "cpp",
+        "xstring": "cpp",
+        "xutility": "cpp",
+        "limits": "cpp",
+        "iostream": "cpp",
+        "utility": "cpp",
+        "vector": "cpp",
+        "system_error": "cpp",
+        "initializer_list": "cpp",
+        "xstddef": "cpp",
+        "iosfwd": "cpp",
+        "cstdlib": "cpp",
+        "cmath": "cpp",
+        "xlocale": "cpp",
+        "xiosbase": "cpp",
+        "type_traits": "cpp",
+        "memory": "cpp",
+        "xtr1common": "cpp",
+        "iterator": "cpp",
+        "compare": "cpp"
+    }
+}
