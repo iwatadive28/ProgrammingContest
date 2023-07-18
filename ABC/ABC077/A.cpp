@@ -23,5 +23,5 @@ int main(){
     bool ans = false ;
     reverse(c1.begin(), c1.end());
     if(c1==c2) ans = true;
-    cout << (ans?"Yes":"No") << endl;
+    cout << (ans?"YES":"NO") << endl;
 }
